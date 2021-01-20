@@ -1,0 +1,9 @@
+{% for endpoint_name, endpoint_data in endpoints.items() %}
+@{{namespace}}.route('{{endpoint_name}}')
+class {{endpoint_data.class}}(Resource):
+    {%- for method in endpoint_data.methods %}
+    @api.doc(
+        description={{client}}.{{method.func_name}}.__doc__
+    )
+    {% endfor %}
+{% endfor %}
