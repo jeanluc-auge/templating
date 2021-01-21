@@ -5,5 +5,16 @@ class {{endpoint_data.class}}(Resource):
     @api.doc(
         description={{client}}.{{method.func_name}}.__doc__
     )
+    def {{method.rest_method}}(self{% for arg in method.func_args.path_args %}, {{arg}}{% endfor %}):
+        {%- for arg in method.func_args.free_args %}
+        {{arg}} = request.args.get('{{arg}}')
+        {%- endfor %}
+        response = {{client}}.{{method.func_name}}(
+            {% for arg in method.func_args.all_args %} {{arg}}={{arg}}, {%- endfor %}
+        )
+        status_code = 200 if response else 400
+        return ( 
+            response, status_code
+        )
     {% endfor %}
 {% endfor %}

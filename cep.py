@@ -9,3 +9,15 @@ class contentd(): # NAMESPACE flask api
         """
         """
 
+    @add_path("post", "/provider/{account}")  # ENDPOINT PATH
+    def post_content_provider(self, account, base_path):
+        """
+        """
+
+class secret:
+    """secret_client"""
+
+    @add_path("get", "/secret/{secret_id}")  # ENDPOINT PATH
+    def get_secret(self, secret_id):
+        """
+        """
